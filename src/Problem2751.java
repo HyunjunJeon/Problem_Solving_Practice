@@ -1,19 +1,18 @@
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Problem2751 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
         int n = sc.nextInt();
-        Integer[] arr = new Integer[n];
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         for(int i = 0; i < n; i++){
-            arr[i] = sc.nextInt();
+            pq.offer(sc.nextInt());
         }
-        Arrays.sort(arr, Collections.reverseOrder());
-        for(int j = 0; j < arr.length; j++){
-            System.out.println(arr[j]);
+        while(!pq.isEmpty()){
+            sb.append(pq.poll() + "\n");
         }
-
+        System.out.println(sb.toString());
     }
 }
