@@ -1,32 +1,37 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Problem4641 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws Exception{
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out))){
+            StringTokenizer st = null;
 
-        int[] a = new int[101];
-        int count = 0;
-        int mcount = 0;
-        do{
-            a[count] = sc.nextInt();
-            count++;
-            if(sc.nextInt() == 0){
-                int b = 0;
-                for(int i = 0; i<a.length-1; i++){
-                    b = a[i];
-                    for(int j = i; j<(a.length-1)-i; j++){
-                        if(2*b == a[j]){
-                            mcount++;
+            while(true){
+                int cnt = 0;
+                st = new StringTokenizer(br.readLine());
+                int[] arr = new int[st.countTokens()];
+                for(int i = 0; i < arr.length; i++){
+                    arr[i] = Integer.parseInt(st.nextToken());
+                }
+                if(arr[0] == -1){
+                    break;
+                }
+                for(int i = 0; i < arr.length; i++){
+                    if(arr[i] != 0){
+                        for(int j = 0; j < arr.length; j++){
+                            if(arr[j] == arr[i]*2){
+                                cnt++;
+                            }
                         }
                     }
                 }
-                count = 0;
-                System.out.println(mcount);
-                mcount = 0;
-                sc.nextLine();
-                continue;
+                bw.write(cnt+"\n");
             }
-        }while(sc.nextInt() != -1);
-
+            bw.flush();
+        }
     }
 }
