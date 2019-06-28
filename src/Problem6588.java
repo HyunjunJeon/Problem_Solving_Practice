@@ -1,35 +1,39 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Problem6588 { // 골드바흐의 추측 ( 아직 못춤 )
-    public static boolean[] getPrimeByChae(int number){
-        boolean[] arr = new boolean[number+1];
-        Arrays.fill(arr, true);
-        arr[1] = false;
-
-        for(int i = 2; i < number+1; i++){
-            for(int j = 2*i; j < number+1; j += i){
-                if(!arr[j]) continue;
-                arr[j] = false;
-            }
-        }
-        return arr;
-    }
-
+public class Problem6588 {
+    private static final int MAX = 1000000;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        while (n != 0){
-            int a = sc.nextInt();
-            boolean[] ar = getPrimeByChae(a);
-            for(int i = 2; i < ar.length; i++){
-                for(int j = 2; j < ar.length; j++){
-                    if(i != j && i < j){
-                        //if(a == ar[i] + ar[j]){
+        boolean[] chk = new boolean[MAX+1];
+        chk[0] = chk[1] = true;
 
-                        //}
+        List<Integer> primeList = new ArrayList<>();
+
+        for (int i=2; i*i <= MAX; i++) {
+            if (chk[i]) continue;
+            for (int j = i+i; j <= MAX; j+=i) {
+                chk[j] = true;
+            }
+            primeList.add(i);
+        }
+
+        while(true){
+            int n = sc.nextInt();
+            if(n == 0) break;
+
+            for(int i = 1; i < primeList.size(); i++) {
+                int a = primeList.get(i);
+                if (!chk[n - a]) {
+                    int b = n - a;
+                    if(a%2 == 1 && b%2 == 1){
+                        System.out.println(n + " = " + a + " + " + b);
+                    }else {
+                        System.out.println("Goldbach's conjecture is wrong.");
                     }
+                    break;
                 }
             }
         }
