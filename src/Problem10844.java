@@ -3,15 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Problem10844 {
-    // D[n][l] = N자리 계단수의 마지막수가 L
+    // D[n][L] = N자리 계단수의 마지막수가 L
     /*
-        d[n-1][l-1]
-        d[n-1][l+1]
+        D[n-1][l-1]
+        D[n-1][l+1]
         두가지 경우가 계단수를 만족시킴
 
-        따라서 D[N][L] = d[n-1][l-1] + d[n-1][l+1] (1 <= L <= 8)
-        D[n][0] = d[n-1][1]
-        d[n][9] = d[n-1][8]
+        따라서 D[N][L] = D[n-1][l-1] + D[n-1][l+1] (1 <= L <= 8)
+        D[n][0] = D[n-1][1] -> L 이 0인 경우는 없음
+        D[n][9] = D[n-1][8]
      */
     public static void main(String[] args) throws IOException {
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){

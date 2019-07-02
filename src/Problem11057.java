@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Problem11057 {
     /*
         D[N][L]: n자리 오르막수 마지막의 수가 L
-        D[N][L] = d[n-1][k] (0~L까지 = k)
+        D[N][L] = D[n-1][k] (0 <= K <= L)
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class Problem11057 {
             for(int j = 0; j <= 9; j++){
                 for(int k = 0; k <= j; k++){
                     d[i][j] += d[i-1][k];
-                    d[i][j] %= bigNum;
+                    d[i][j] %= bigNum; // 이부분 조심해야함 -> 나머지 연산의 특징
                 }
             }
         }
